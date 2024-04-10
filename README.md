@@ -156,8 +156,4 @@ Contributions are always welcome!
 
 ## acknowledgment
 
-Inspired by the flutter_ffmpeg library.
-https://github.com/rurico/flutter_video_compress
 https://github.com/jonataslaw/VideoCompress.git
-
-Made with ❤ by Flutter team at Tastech-asia
