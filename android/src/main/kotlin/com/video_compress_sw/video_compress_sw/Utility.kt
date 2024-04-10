@@ -112,13 +112,15 @@ class Utility(private val channelName: String) {
                     if (bitmap != null) {
                         val width: Int = bitmap.getWidth()
                         val height: Int = bitmap.getHeight()
+                        val rWidth = maxWidth;
+                        val rHeight = maxHeight;
                         if (maxWidth === 0) {
-                            maxWidth = Math.round((maxHeight as Float / height) * width)
+                            rWidth = Math.round((maxHeight as Float / height) * width)
                         }
                         if (maxHeight === 0) {
-                            maxHeight = Math.round((maxWidth as Float / width) * height)
+                            rHeight = Math.round((maxWidth as Float / width) * height)
                         }
-                        bitmap = Bitmap.createScaledBitmap(bitmap, maxWidth, maxHeight, true)
+                        bitmap = Bitmap.createScaledBitmap(bitmap, rWidth, rHeight, true)
                     }
                 }
             } else {
