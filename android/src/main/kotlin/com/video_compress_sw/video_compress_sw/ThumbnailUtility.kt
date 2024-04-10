@@ -20,7 +20,7 @@ class ThumbnailUtility(channelName: String) {
         result.success(byteArray.toList().toByteArray())
     }
 
-    fun getFileThumbnail(context: Context, path: String, quality: Intm position: Long, maxWidth: Int, maxHeight: Int, result: MethodChannel.Result) {
+    fun getFileThumbnail(context: Context, path: String, quality: Int, position: Long, maxWidth: Int, maxHeight: Int, result: MethodChannel.Result) {
         val bmp = utility.getBitmap(path, position, maxWidth, maxHeight, result)
 
         val dir = context.getExternalFilesDir("video_compress")

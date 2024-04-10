@@ -56,7 +56,7 @@ class VideoCompressSWPlugin: FlutterPlugin, MethodCallHandler {
         val position = call.argument<Int>("position")!! // to long
         val maxWidth = call.argument<Int>("maxWidth")!!
         val maxHeight = call.argument<Int>("maxHeight")!!
-        ThumbnailUtility("video_compress").getFileThumbnail(context, path!!, quality,
+        ThumbnailUtility(channelName).getFileThumbnail(context, path!!, quality,
           position.toLong(), maxWidth, maxHeight, result)
       }
       "getMediaInfo" -> {

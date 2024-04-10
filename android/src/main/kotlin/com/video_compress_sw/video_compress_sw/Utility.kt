@@ -92,7 +92,7 @@ class Utility(private val channelName: String) {
         retriever.setDataSource(inputStream.fd)
     }
 
-    fun getBitmap(path: String, position: Long, maxWidth: Int, maxHeight: Int result: MethodChannel.Result): Bitmap {
+    fun getBitmap(path: String, position: Long, maxWidth: Int, maxHeight: Int, result: MethodChannel.Result): Bitmap {
         var bitmap: Bitmap? = null
         val retriever = MediaMetadataRetriever()
 
@@ -101,7 +101,7 @@ class Utility(private val channelName: String) {
             bitmap = retriever.getFrameAtTime(position, MediaMetadataRetriever.OPTION_CLOSEST_SYNC)
 
             if (maxWidth !== 0 || maxHeight !== 0) {
-                if (android.os.Build.VERSION.SDK_INT >= 27 && targetH !== 0 && targetW !== 0) {
+                if (android.os.Build.VERSION.SDK_INT >= 27 && maxHeight !== 0 && maxWidth !== 0) {
                     // API Level 27
                     bitmap = retriever.getScaledFrameAtTime(
                         position, MediaMetadataRetriever.OPTION_CLOSEST,
@@ -112,11 +112,11 @@ class Utility(private val channelName: String) {
                     if (bitmap != null) {
                         val width: Int = bitmap.getWidth()
                         val height: Int = bitmap.getHeight()
-                        if (targetW === 0) {
-                            targetW = Math.round((maxHeight as Float / height) * width)
+                        if (maxWidth === 0) {
+                            maxWidth = Math.round((maxHeight as Float / height) * width)
                         }
-                        if (targetH === 0) {
-                            targetH = Math.round((maxWidth as Float / width) * height)
+                        if (maxHeight === 0) {
+                            maxHeight = Math.round((maxWidth as Float / width) * height)
                         }
                         bitmap = Bitmap.createScaledBitmap(bitmap, maxWidth, maxHeight, true)
                     }
