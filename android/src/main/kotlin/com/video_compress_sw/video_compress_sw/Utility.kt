@@ -112,8 +112,8 @@ class Utility(private val channelName: String) {
                     if (bitmap != null) {
                         val width: Int = bitmap.getWidth()
                         val height: Int = bitmap.getHeight()
-                        val rWidth = maxWidth;
-                        val rHeight = maxHeight;
+                        var rWidth = maxWidth;
+                        var rHeight = maxHeight;
                         if (maxWidth === 0) {
                             rWidth = Math.round((maxHeight as Float / height) * width)
                         }
