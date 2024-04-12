@@ -77,7 +77,7 @@ public class VideoCompressSWPlugin: NSObject, FlutterPlugin {
         }
 
 //        assetImgGenerate.requestedTimeToleranceBefore = .zero
-        assetImgGenerate.requestedTimeToleranceAfter = CMTimeMake(value: 100, timescale: 1000)
+//        assetImgGenerate.requestedTimeToleranceAfter = CMTimeMake(value: 100, timescale: 1000)
 
         let timeScale = asset.duration.timescale
         let time = CMTimeMakeWithSeconds(Double(position) / 1000.0, preferredTimescale:timeScale)
