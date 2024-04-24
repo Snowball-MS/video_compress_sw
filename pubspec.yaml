@@ -1,6 +1,6 @@
 name: video_compress_sw
 description: "w"
-version: 0.1.0+4
+version: 0.1.0+5
 homepage: https://github.com/Snowball-MS/video_compress_sw.git
 
 environment:

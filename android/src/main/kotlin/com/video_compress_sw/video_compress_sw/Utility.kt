@@ -98,33 +98,28 @@ class Utility(private val channelName: String) {
 
         try {
             setDataSource(path,retriever )
-            bitmap = retriever.getFrameAtTime(position, MediaMetadataRetriever.OPTION_CLOSEST_SYNC)
 
-            if (maxWidth !== 0 || maxHeight !== 0) {
-                if (android.os.Build.VERSION.SDK_INT >= 27 && maxHeight !== 0 && maxWidth !== 0) {
-                    // API Level 27
-                    bitmap = retriever.getScaledFrameAtTime(
-                        position, MediaMetadataRetriever.OPTION_CLOSEST,
-                        maxWidth, maxHeight
-                    )
-                } else {
-                    bitmap = retriever.getFrameAtTime(position, MediaMetadataRetriever.OPTION_CLOSEST)
-                    if (bitmap != null) {
-                        val width: Int = bitmap.getWidth()
-                        val height: Int = bitmap.getHeight()
-                        var rWidth = maxWidth;
-                        var rHeight = maxHeight;
-                        if (maxWidth === 0) {
-                            rWidth = Math.round((maxHeight as Float / height) * width)
+            if (android.os.Build.VERSION.SDK_INT >= 27 && maxWidth > 0 && maxHeight > 0) {
+                bitmap = retriever.getScaledFrameAtTime(
+                    position, MediaMetadataRetriever.OPTION_CLOSEST_SYNC,
+                    maxWidth, maxHeight
+                )
+            } else {
+                bitmap = retriever.getFrameAtTime(position, MediaMetadataRetriever.OPTION_CLOSEST_SYNC)
+                bitmap?.let {
+                    if (maxWidth > 0 || maxHeight > 0) {
+                        val ratio = if (maxWidth > 0 && maxHeight > 0) {
+                            Math.min(maxWidth.toDouble() / it.width, maxHeight.toDouble() / it.height)
+                        } else if (maxWidth > 0) {
+                            maxWidth.toDouble() / it.width
+                        } else {
+                            maxHeight.toDouble() / it.height
                         }
-                        if (maxHeight === 0) {
-                            rHeight = Math.round((maxWidth as Float / width) * height)
-                        }
-                        bitmap = Bitmap.createScaledBitmap(bitmap, rWidth, rHeight, true)
+                        val newWidth = (it.width * ratio).toInt()
+                        val newHeight = (it.height * ratio).toInt()
+                        bitmap = Bitmap.createScaledBitmap(it, newWidth, newHeight, true)
                     }
                 }
-            } else {
-                bitmap = retriever.getFrameAtTime(position, MediaMetadataRetriever.OPTION_CLOSEST)
             }
 
         } catch (ex: IllegalArgumentException) {
