@@ -101,11 +101,11 @@ class Utility(private val channelName: String) {
 
             if (android.os.Build.VERSION.SDK_INT >= 27 && maxWidth > 0 && maxHeight > 0) {
                 bitmap = retriever.getScaledFrameAtTime(
-                    position, MediaMetadataRetriever.OPTION_CLOSEST_SYNC,
+                    position * 1000, MediaMetadataRetriever.OPTION_CLOSEST_SYNC,
                     maxWidth, maxHeight
                 )
             } else {
-                bitmap = retriever.getFrameAtTime(position, MediaMetadataRetriever.OPTION_CLOSEST_SYNC)
+                bitmap = retriever.getFrameAtTime(position * 1000, MediaMetadataRetriever.OPTION_CLOSEST_SYNC)
                 bitmap?.let {
                     if (maxWidth > 0 || maxHeight > 0) {
                         val ratio = if (maxWidth > 0 && maxHeight > 0) {
