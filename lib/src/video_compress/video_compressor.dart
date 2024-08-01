@@ -94,7 +94,7 @@ extension Compress on IVideoCompress {
       'maxHeight': maxHeight,
     }));
 
-    final file = File(Uri.decodeFull(filePath!));
+    final file = File(Uri.decodeComponent(filePath!));
 
     return file;
   }
