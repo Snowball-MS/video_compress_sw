@@ -17,7 +17,6 @@ import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
-import io.flutter.plugin.common.PluginRegistry.Registrar
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -195,15 +194,5 @@ class VideoCompressSWPlugin: FlutterPlugin, MethodCallHandler {
     channel.setMethodCallHandler(this)
     _context = context
     _channel = channel
-  }
-
-  companion object {
-    private const val TAG = "video_compress"
-
-    @JvmStatic
-    fun registerWith(registrar: Registrar) {
-      val instance = VideoCompressSWPlugin()
-      instance.init(registrar.context(), registrar.messenger())
-    }
   }
 }
